@@ -19,9 +19,7 @@ function start () {
     ;;
     esac
 
-    export FLASK_APP=main.py
-    export FLASK_ENV=development
-    flask run
+    python run.py
 }
 
 case "$1" in
