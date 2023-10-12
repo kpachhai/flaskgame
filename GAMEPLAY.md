@@ -1,0 +1,75 @@
+# Game Documentation: "Medieval Card Duel"
+
+---
+
+**Introduction:**
+
+"Medieval Card Duel" is a turn-based card game where a player faces off against a computer-controlled opponent. The game is set in a medieval theme, and players use cards representing various medieval characters to earn money, launch attacks, and ultimately reduce the opponent's health to zero.
+
+---
+
+**Objective:**
+
+The primary objective of the game is to reduce the computer opponent's health to zero before the player's health reaches zero or before the central deck of cards runs out.
+
+---
+
+**Game Components:**
+
+1. **Central Deck**: A shuffled deck of cards from which players can purchase cards to add to their discard pile. The central deck has a limited number of cards.
+2. **Central Active Cards**: Five cards drawn from the central deck that are available for purchase.
+3. **Supplement Card**: A special card that can be purchased multiple times until it runs out.
+4. **Player's Deck**: A deck of cards from which the player draws their hand.
+5. **Player's Hand**: Cards that the player can play or use during their turn.
+6. **Player's Active Cards**: Cards that have been played by the player during their turn.
+7. **Player's Discard Pile**: Cards that have been used or purchased go here and will be reshuffled into the player's deck when it runs out.
+8. **Computer's Deck, Hand, Active Cards, and Discard Pile**: Similar components as the player but for the computer opponent.
+
+---
+
+**Starting the Game:**
+
+1. The player chooses the type of opponent they want to face: Aggressive (A) or Acquisitive (Q).
+2. Both the player and the computer start with 30 health points.
+3. The central deck is populated with a set of predefined cards and shuffled. Five of these cards are drawn as the central active cards.
+4. Both the player and the computer receive a starting deck of 10 cards each, consisting of 7 "Serf" cards and 3 "Squire" cards.
+5. Both players draw 5 cards from their respective decks to form their starting hand.
+
+---
+
+**Playing a Turn:**
+
+During the player's turn, they can perform the following actions:
+
+1. **Play All Cards (P)**: Play all cards from their hand, accumulating money and attack values.
+2. **Play a Specific Card (C)**: Play a specific card from their hand by specifying its index.
+3. **Buy a Card (B)**: Purchase a card from the central active cards or the supplement card by specifying its index. The card goes to the player's discard pile.
+4. **Attack (A)**: Use the accumulated attack value to reduce the computer's health.
+5. **End Turn (E)**: End their turn, moving all cards from their hand and active area to the discard pile and drawing a new hand.
+
+After the player's turn, the computer takes its turn, following a set of predefined strategies based on its type (Aggressive or Acquisitive).
+
+---
+
+**Game End Conditions:**
+
+1. **Player's Health Reaches Zero**: The computer wins.
+2. **Computer's Health Reaches Zero**: The player wins.
+3. **Central Deck Runs Out**: The game ends in a draw if both players have equal health. Otherwise, the player with the higher health wins.
+
+---
+
+**Edge Cases:**
+
+1. **Invalid Card Index**: If the player tries to play or buy a card using an index that doesn't exist, an error is raised.
+2. **Insufficient Money**: If the player tries to buy a card but doesn't have enough money, an error is raised.
+3. **Supplement Card Runs Out**: If the player tries to buy the supplement card when none are left, an error is raised.
+4. **Deck Runs Out**: If a player's deck runs out when they need to draw cards, their discard pile is shuffled and becomes their new deck.
+
+---
+
+**Technical Details:**
+
+1. The game state is stored in a session, allowing for continuity between different requests.
+2. The game logic is encapsulated in the `Game` class, which provides methods to start the game, play a turn, get the current status, and save/load the game state.
+3. The game's backend is built using Flask and provides endpoints to start the game, play a turn, and get the current status.
