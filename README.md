@@ -17,13 +17,13 @@
      ```bash
      curl -b cookies.txt -X POST -H "Content-Type: application/json" -d '{"action": "play_all"}' http://localhost:5000/play_turn | jq .
      ```
-   - Play a specific card (e.g., the card at index 2):
+   - Play a specific card (e.g., the card at index 1):
      ```bash
-     curl -b cookies.txt -X POST -H "Content-Type: application/json" -d '{"action": "play_that_card", "card_index": 2}' http://localhost:5000/play_turn | jq .
+     curl -b cookies.txt -X POST -H "Content-Type: application/json" -d '{"action": "play_that_card", "card_index": 1}' http://localhost:5000/play_turn | jq .
      ```
-   - Buy a card from the central active cards (e.g., the card at index 1):
+   - Buy a card from the central active cards (e.g., the card at index 2):
      ```bash
-     curl -b cookies.txt -X POST -H "Content-Type: application/json" -d '{"action": "buy_card", "card_index": 1}' http://localhost:5000/play_turn | jq .
+     curl -b cookies.txt -X POST -H "Content-Type: application/json" -d '{"action": "buy_card", "card_index": 2}' http://localhost:5000/play_turn | jq .
      ```
    - Attack the computer:
      ```bash
