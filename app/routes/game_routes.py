@@ -1,8 +1,15 @@
+import logging
+
 from flask import Blueprint, jsonify, request, session
 
-from ..models.game import Game
+from app.models.game import Game
+from app.utils.exceptions import (InsufficientMoneyError,
+                                  InsufficientSupplementError,
+                                  InvalidCardIndexError)
 
 game_blueprint = Blueprint('game', __name__)
+
+logging.basicConfig(level=logging.INFO)
 
 @game_blueprint.route('/start', methods=['POST'])
 def start_game():
@@ -42,25 +49,25 @@ def play_turn():
         game_status, message, current_status = '', '', game_instance.get_status();
         # Check game end conditions after the turn is played
         if game_instance.pO['health'] <= 0:
-            print ("Computer wins")
+            logging.info("Computer wins")
             game_status = 'ended'
             message = 'Computer wins'
         elif game_instance.pC['health'] <= 0:
-            print ('Player wins')
+            logging.info('Player wins')
             game_status = 'ended'
             message = 'Player wins'
         elif game_instance.central['activeSize'] == 0:
-            print ("No more cards available")
+            logging.info("No more cards available")
             if game_instance.pO['health'] > game_instance.pC['health']:
                 print ("Player wins on Health")
                 game_status = 'ended'
                 message = 'Player wins on Health'
             elif game_instance.pC['health'] > game_instance.pO['health']:
-                print ("Computer wins")
+                logging.info("Computer wins")
                 game_status = 'ended'
                 message = 'Computer wins'
             else:
-                print ("Draw")
+                logging.info("Draw")
                 game_status = 'ended'
                 message = 'The game ends in a draw'
         else:   
@@ -89,25 +96,25 @@ def get_status():
     game_status, message, current_status = '', '', game_instance.get_status();
     # Check game end conditions after the turn is played
     if game_instance.pO['health'] <= 0:
-        print ("Computer wins")
+        logging.info("Computer wins")
         game_status = 'ended'
         message = 'Computer wins'
     elif game_instance.pC['health'] <= 0:
-        print ('Player wins')
+        logging.info('Player wins')
         game_status = 'ended'
         message = 'Player wins'
     elif game_instance.central['activeSize'] == 0:
-        print ("No more cards available")
+        logging.info("No more cards available")
         if game_instance.pO['health'] > game_instance.pC['health']:
-            print ("Player wins on Health")
+            logging.info("Player wins on Health")
             game_status = 'ended'
             message = 'Player wins on Health'
         elif game_instance.pC['health'] > game_instance.pO['health']:
-            print ("Computer wins")
+            logging.info("Computer wins")
             game_status = 'ended'
             message = 'Computer wins'
         else:
-            print ("Draw")
+            logging.info("Draw")
             game_status = 'ended'
             message = 'The game ends in a draw'
     else:   

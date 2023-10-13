@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_session import Session
 
-from .routes import game_routes
+from app.routes import game_routes
 
 
 def create_app():
