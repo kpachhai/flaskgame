@@ -1,0 +1,94 @@
+## Future Roadmap for Medieval Card Duel Game
+
+### 1. **Database Integration**
+
+**Estimated Duration**: 2 weeks
+
+**Details**:
+
+- Choose a suitable database (e.g., PostgreSQL for relational data).
+- Design the database schema to store game states, user profiles, and other necessary data.
+- Implement database models using an ORM like SQLAlchemy.
+- Migrate current in-memory game states and sessions data to the database.
+- Implement backup and restore mechanisms for the database.
+
+### 2. **User Authentication and Authorization**
+
+**Estimated Duration**: 2 weeks
+
+**Details**:
+
+- Implement user registration and login functionality.
+- Use JWT or OAuth for token-based authentication.
+- Set up roles and permissions to differentiate between regular users and administrators.
+- Ensure password security using hashing (e.g., bcrypt).
+
+### 3. **Enhanced Game Features**
+
+**Estimated Duration**: 4 weeks
+
+**Details**:
+
+- Design and implement new card types and abilities.
+- Introduce new game mechanics and challenges.
+- Implement a leaderboard system with ranking algorithms.
+- Add achievements and rewards for players.
+
+### 4. **Logging, Monitoring, and Alerting**
+
+**Estimated Duration**: 1 week
+
+**Details**:
+
+- Integrate a logging system like Loguru or Python's built-in logging.
+- Set up monitoring tools (e.g., Grafana, Prometheus) to track API performance and usage.
+- Implement alerting mechanisms to notify developers of any issues or downtimes.
+
+### 5. **Frontend Development**
+
+**Estimated Duration**: 6 weeks
+
+**Details**:
+
+- Design a user-friendly UI/UX for the game.
+- Develop a web frontend using frameworks like React or Vue.js.
+- Implement mobile app versions for Android and iOS.
+- Ensure synchronization between frontend and backend.
+
+### 6. **Performance Optimization**
+
+**Estimated Duration**: 2 weeks
+
+**Details**:
+
+- Profile the API to identify bottlenecks.
+- Optimize database queries and introduce caching mechanisms (e.g., Redis).
+- Implement load balancing if necessary.
+- Optimize frontend assets and implement CDN for faster content delivery.
+
+### 7. **Expand Testing and Documentation**
+
+**Estimated Duration**: 3 weeks
+
+**Details**:
+
+- Write integration and end-to-end tests.
+- Set up a CI/CD pipeline for automated testing and deployment.
+- Use tools like Swagger for detailed API documentation.
+- Document frontend components and their interactions.
+
+### 8. **Feedback and Iteration**
+
+**Estimated Duration**: 2 weeks
+
+**Details**:
+
+- Collect user feedback on the game and its features.
+- Iterate on the feedback to make necessary improvements.
+- Conduct beta testing to identify and fix any remaining issues.
+
+---
+
+**Total Duration**: 22 weeks (Approximately 5.5 months)
+
+**Note**: The above durations are estimates and can vary based on unforeseen challenges, feedback, and other factors. Regular sprint reviews and retrospectives should be conducted to ensure the project stays on track and adapts to any changes or new requirements.
