@@ -145,11 +145,11 @@ class Game:
                 raise InvalidCardIndexError(f"Invalid card index: {card_index}")
         
         if action == "P" or action == "play_all":
-            for card in self.pO['hand']:
+            while self.pO['hand']:
+                card = self.pO['hand'].pop()
                 self.pO['money'] += card.money
                 self.pO['attack'] += card.attack
                 self.pO['active'].append(card)
-            self.pO['hand'] = []
 
         elif action == "C" or action == "play_that_card":
             if 0 <= card_index < len(self.pO['hand']):
