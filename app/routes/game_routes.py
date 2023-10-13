@@ -14,7 +14,17 @@ api = Api(game_blueprint)
 logging.basicConfig(level=logging.INFO)
 
 class StartGame(Resource):
+    """
+    Resource for starting a new game.
+    """
+
     def post(self):
+        """
+        Starts a new game based on the provided opponent type.
+
+        Returns:
+            dict: Response indicating success and the current game status.
+        """
         parser = reqparse.RequestParser()
         parser.add_argument('opponent_type', type=str, default="A")
         args = parser.parse_args()
@@ -31,7 +41,17 @@ class StartGame(Resource):
         }
 
 class PlayTurn(Resource):
+    """
+    Resource for playing a turn in the game.
+    """
+
     def post(self):
+        """
+        Executes a turn based on the provided action and card index.
+
+        Returns:
+            dict: Response indicating the game status after the turn.
+        """
         if 'game_state' not in session:
             return {"error": "Game not started. Please start a game first."}, 400
 
@@ -49,13 +69,23 @@ class PlayTurn(Resource):
             session.modified = True
 
             return self._get_game_status(game_instance)
-
+        except ValueError as e:  # Catch invalid actions
+            return {"success": False, "error": str(e)}, 400
         except (InvalidCardIndexError, InsufficientMoneyError, InsufficientSupplementError) as e:
             return {"success": False, "error": str(e)}, 400
         except Exception as e:
             return {"error": str(e)}, 400
 
     def _get_game_status(self, game_instance):
+        """
+        Retrieves the current game status.
+
+        Args:
+            game_instance (Game): The current game instance.
+
+        Returns:
+            dict: Response indicating the current game status.
+        """
         # This function checks the game status and returns the appropriate response
         if 'game_state' not in session:
             return jsonify(error="Game not started. Please start a game first."), 400
@@ -98,7 +128,17 @@ class PlayTurn(Resource):
         })
 
 class GameStatus(Resource):
+    """
+    Resource for retrieving the current game status.
+    """
+
     def get(self):
+        """
+        Retrieves the current game status.
+
+        Returns:
+            dict: Response indicating the current game status.
+        """
         if 'game_state' not in session:
             return {"error": "Game not started. Please start a game first."}, 400
 

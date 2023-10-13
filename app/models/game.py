@@ -9,7 +9,23 @@ from app.utils.exceptions import (InsufficientMoneyError,
 logging.basicConfig(level=logging.INFO)
 
 class Game:
+    """
+    Represents the main game logic and state.
+
+    Attributes:
+        aggressive (bool): Determines the type of opponent (Aggressive or Acquisitive).
+        central (dict): Represents the central deck and its state.
+        pO (dict): Represents the player's state.
+        pC (dict): Represents the computer's state.
+    """
+
     def __init__(self, opponent_type="A"):
+        """
+        Initializes a new game with the given opponent type.
+
+        Args:
+            opponent_type (str, optional): Type of opponent. Defaults to "A" (Aggressive).
+        """
         self.aggressive = opponent_type in ["A", "Aggressive"]
         self.central = {
             'name': 'central',
@@ -23,6 +39,15 @@ class Game:
         self._initialize_game()
 
     def _initialize_player(self, name):
+        """
+        Initializes a player's state.
+
+        Args:
+            name (str): Name of the player.
+
+        Returns:
+            dict: Initialized player state.
+        """
         return {
             'name': name,
             'health': 30,
@@ -36,6 +61,9 @@ class Game:
         }
 
     def _initialize_game(self):
+        """
+        Initializes the game state, setting up the central deck, player decks, and drawing initial cards.
+        """
         # Initialize central deck with a set of cards
         self.central['deck'] = [
             Card("Thug", 1, 2, 0),
@@ -67,6 +95,12 @@ class Game:
         random.shuffle(self.pC['deck'])
 
     def start(self):
+        """
+        Starts the game, drawing initial cards for players and displaying available cards.
+
+        Returns:
+            dict: Information about the available cards in the central deck.
+        """
         # Draw initial cards for players
         for _ in range(self.pO['handsize']):
             self.pO['hand'].append(self.pO['deck'].pop())
@@ -93,6 +127,13 @@ class Game:
         }
 
     def play_turn(self, action, card_index=None):
+        """
+        Executes a turn based on the provided action and card index.
+
+        Args:
+            action (str): The action to be performed.
+            card_index (int, optional): Index of the card to be played or bought. Defaults to None.
+        """
         logging.info(f"Enter Action: {action}")
         logging.info(action)            
         
@@ -279,6 +320,9 @@ class Game:
             logging.info(f"Player Health: {self.pO['health']}")
             logging.info(f"Computer Health: {self.pC['health']}")
         
+        elif action not in ["P", "play_all", "C", "play_that_card", "B", "buy_card", "A", "attack", "E", "end_turn"]:
+            raise ValueError(f"Invalid action: {action}")
+    
         logging.info("Your Hand")
         for card in self.pO['hand']:
             logging.info(f"Name {card.name} costing {card.cost} with attack {card.attack} and money {card.money}")
@@ -293,6 +337,12 @@ class Game:
         logging.info(f"Computer Health: {self.pC['health']}")
                 
     def get_status(self):
+        """
+        Retrieves the current status of the game.
+
+        Returns:
+            dict: Current game status including player, computer, and central deck states.
+        """
         return {
             'player': {
                 'health': self.pO['health'],
@@ -320,6 +370,12 @@ class Game:
         }
         
     def get_state(self):
+        """
+        Retrieves the complete state of the game.
+
+        Returns:
+            dict: Complete game state including player, computer, and central deck states.
+        """
         state = {
             'aggressive': self.aggressive,
             'central': {
@@ -349,6 +405,12 @@ class Game:
         return state
 
     def set_state(self, state):
+        """
+        Sets the game state based on the provided state.
+
+        Args:
+            state (dict): The state to set the game to.
+        """
         self.aggressive = state['aggressive']
         self.central['deck'] = [Card(**card_data) for card_data in state['central']['deck']]
         self.central['active'] = [Card(**card_data) for card_data in state['central']['active']]
