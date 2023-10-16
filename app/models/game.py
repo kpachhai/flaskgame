@@ -26,7 +26,7 @@ class Game:
         Args:
             opponent_type (str, optional): Type of opponent. Defaults to "A" (Aggressive).
         """
-        self.aggressive = opponent_type in ["A", "Aggressive"]
+        self.aggressive = opponent_type in ["A", "aggressive"]
         self.central = {
             'name': 'central',
             'active': [],
@@ -142,7 +142,7 @@ class Game:
                 card_index = int(card_index)
             except InvalidCardIndexError as e:
                 logging.info(f"Invalid card index: {card_index}")
-                raise InvalidCardIndexError(f"Invalid card index: {card_index}")
+                raise InvalidCardIndexError(f"Invalid card index: {card_index}: {str(e)}")
         
         if action == "P" or action == "play_all":
             while self.pO['hand']:

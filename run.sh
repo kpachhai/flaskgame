@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-function start () {
-    virtualenv -p `which python3.9` .venv
+function installDependencies() {
+    if [ ! -d ".venv" ]; then
+        virtualenv -p `which python3.9` .venv
+    fi
+
     source .venv/bin/activate
     pip install --upgrade pip
 
@@ -18,15 +21,46 @@ function start () {
     exit 1
     ;;
     esac
+}
 
+function venv_start () {  
+    installDependencies
+    echo "Running using virtual environment..."
     python run.py
 }
 
+function docker_start () {
+    if ! command -v docker &> /dev/null; then
+        echo "Docker is not installed."
+        echo "Please install Docker for `uname` first and then try again."
+        exit 1
+    fi
+    echo "Running using docker..."
+    docker container stop flaskgame-cardduel || true && docker container rm -f flaskgame-cardduel || true
+    docker build -t kpachhai/flaskgame-cardduel .
+    docker run --name flaskgame-cardduel    \
+        -v ${PWD}/.env:/src/.env            \
+        -p 5000:5000                        \
+        kpachhai/flaskgame-cardduel
+}
+
+function test() {
+    installDependencies
+    echo "Running tests..."
+    pytest
+}
+
 case "$1" in
-    start)
-        start
+    venv)
+        venv_start
+        ;;
+    docker)
+        docker_start
+        ;;
+    test)
+        test
         ;;
     *)
-    echo "Usage: run.sh {start}"
+    echo "Usage: run.sh {venv|docker|test}"
     exit 1
 esac
