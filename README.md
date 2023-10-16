@@ -9,6 +9,7 @@ FlaskGame is a card-based duel game where you can challenge a computer opponent 
 - [Running the Game](#running-the-game)
 - [API Endpoints](#api-endpoints)
 - [Testing](#testing)
+- [Docs](#docs)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -263,6 +264,16 @@ To run tests:
 ```bash
 ./run.sh test
 ```
+
+## Docs
+
+You can check out the documentation in more detail.
+
+- [PLANNING](./docs/1.%20PLANNING.md): This document outlines the initial steps and considerations for converting the basic game logic into a Flask API service. It details the process from understanding the original code to documenting the new API endpoints.
+- [REMEDIATION](./docs/2.%20REMEDIATION.md): A guide that lists and explains the solutions to known vulnerabilities and security concerns in the project. It provides a structured approach to addressing and mitigating potential risks.
+- [KNOWNISSUES](./docs/3.%20KNOWNISSUES.md): A compilation of identified bugs, glitches, and areas of improvement in the game. It serves as a reference for developers to understand, prioritize, and address these issues in future updates.
+- [GAMEPLAY](./docs/4.%20GAMEPLAY.md): An overview of the game's mechanics, rules, and interactions. It provides players and developers with a clear understanding of how the game functions, its objectives, and the strategies involved.
+- [ROADMAP](./docs/5.%20ROADMAP.md): A forward-looking document that charts the future development path for the Flask Card Duel Game. It breaks down upcoming features, enhancements, and milestones, providing estimated timelines for each.
 
 ## Contributing
 
