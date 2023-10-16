@@ -49,6 +49,8 @@ You can run the game in two modes: using a virtual environment or using Docker.
   ./run.sh docker
   ```
 
+  **NOTE**: Running the program in docker will use Gunicorn to run the Flask application and also runs it as if it were deployed in a production environment.
+
 Once the game is running, you can interact with it using the API endpoints described below.
 
 ## API Endpoints
