@@ -39,7 +39,6 @@ function docker_start () {
     docker container stop flaskgame-cardduel || true && docker container rm -f flaskgame-cardduel || true
     docker build -t kpachhai/flaskgame-cardduel .
     docker run --name flaskgame-cardduel    \
-        -v ${PWD}/.env:/src/.env            \
         -p 5000:5000                        \
         kpachhai/flaskgame-cardduel
 }

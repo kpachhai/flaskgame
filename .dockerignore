@@ -1,0 +1,6 @@
+**/__pycache__/
+.flask_session/
+**/.pytest_cache/
+.venv/
+cookies.txt
+tests/
